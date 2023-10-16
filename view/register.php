@@ -1,4 +1,33 @@
-<body style="background-color: #333;">
+<body style="background-color: #2266c0;">
+
+<?php
+
+// Vérifier si le formulaire a été soumis
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Récupérer les informations du formulaire avec $_POST
+    $username = htmlspecialchars($_POST['username']);
+    $email = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']);
+
+    $error = "";
+
+   // disponibilité de l'username et de l'email
+    if (isUsernameAvailable($username) && isEmailAvailable($email)) {
+        userRegistration($username, $email, $password);
+    } else {
+        if (!isUsernameAvailable($username)) {
+            $error = "Username indisponible";
+        }
+        if (!isEmailAvailable($email)) {
+            $error = "Email indisponible";
+        }
+    }
+}
+?>
+
+
+
+
 	<section id="login-container">
 		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 midway-horizontal midway-vertical fadeInDown animated">
 			<div id="logbox" class="register">
@@ -28,10 +57,41 @@
 					</div>
 
 					<div class="form-submit">
-						<input type="submit" value="Je m'inscris !">	
+						<input type="submit" value="Je m'inscris !">
 					</div>
 					<p class="account">Vous avez un compte ? <a href="login.php">Connectez-vous !</a></p>
 				</form>
-			</div>
+                <?php
+                $error = "";
+
+                if (isUsernameAvailable($username) && isEmailAvailable($email)) {
+                    userRegistration($username, $email, $password);
+                } else {
+                    if (!isUsernameAvailable($username)) {
+                        $error .= "Username indisponible. ";
+                    }
+                    if (!isEmailAvailable($email)) {
+                        $error .= "Email indisponible. ";
+                    }
+                }
+
+
+                if (isset($_POST['email'])) {
+                    echo '<p class="email">Email: ' . htmlspecialchars($_POST['email']) . '</p>';
+                }
+
+                if (isset($_POST['username'])) {
+                    echo '<p class="username">Username: ' . htmlspecialchars($_POST['username']) . '</p>';
+                }
+
+                if()
+
+                if (isset($_POST['password'])) {
+                    echo '<p class="password">Password: ' . htmlspecialchars($_POST['password']) . '</p>';
+                }
+                ?>
+
+            </div>
+
 		</div>
 	</section>
