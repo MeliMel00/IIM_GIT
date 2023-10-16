@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     echo '<p class="username">Username: ' . htmlspecialchars($_POST['username']) . '</p>';
                 }
 
-                if()
+
 
                 if (isset($_POST['password'])) {
                     echo '<p class="password">Password: ' . htmlspecialchars($_POST['password']) . '</p>';
